@@ -6,6 +6,8 @@ import time
 import os
 import asyncio
 from dotenv import load_dotenv
+from flask import Flask
+from threading import Thread
 
 # Load secrets securely
 load_dotenv()
@@ -57,17 +59,13 @@ def to_unix(date_str, time_str):
 
 def format_session(api_key, date_str, time_str, current_time):
     name_map = {
-        "FirstPractice": "Practice 1", 
-        "SecondPractice": "Practice 2",
-        "ThirdPractice": "Practice 3", 
-        "Qualifying": "Qualifying",
-        "SprintQualifying": "Sprint Qualifying", 
-        "Sprint": "    Sprint",
+        "FirstPractice": "Practice 1", "SecondPractice": "Practice 2",
+        "ThirdPractice": "Practice 3", "Qualifying": "Qualifying",
+        "SprintQualifying": "Sprint Qualifying", "Sprint": "    Sprint",
         "Race": "      Race"
     }
     display_name = name_map.get(api_key, api_key)
     unix_time = to_unix(date_str, time_str)
-    
     line = f"`{display_name}`: <t:{unix_time}:F> (<t:{unix_time}:R>)"
     if unix_time < current_time:
         return f"> ~~{line}~~"
@@ -76,7 +74,6 @@ def format_session(api_key, date_str, time_str, current_time):
 def generate_short_msg(race, current_time):
     race_name = race['raceName']
     flag = FLAG_EMOJIS.get(race_name, "🏁")
-    
     msg = f"## {flag} {race_name}\n\n"
     
     if 'FirstPractice' in race: msg += format_session("FirstPractice", race['FirstPractice']['date'], race['FirstPractice']['time'], current_time) + "\n"
@@ -100,7 +97,8 @@ async def fetch_api_data():
     schedule_cache = response['MRData']['RaceTable']['Races']
     print("F1 Schedule data refreshed from API.")
 
-@tasks.loop(minutes=1)
+# Increased loop interval to 3 minutes to avoid Discord API rate limits
+@tasks.loop(minutes=3)
 async def dashboard_manager():
     global calendar_messages, next_gp_message, current_next_round
     
@@ -109,11 +107,11 @@ async def dashboard_manager():
 
     current_time = time.time()
     
-    # --- 1. FIND THE NEXT GP (Chronological Math) ---
+    # 1. FIND THE NEXT GP
     upcoming_races = [r for r in schedule_cache if to_unix(r['date'], r['time']) > current_time]
     next_race = min(upcoming_races, key=lambda r: to_unix(r['date'], r['time'])) if upcoming_races else None
 
-    # --- 2. THE BULLETPROOF BRUTE-FORCE SORT ---
+    # 2. BRUTE-FORCE SORT
     def custom_sort(race):
         name = race['raceName'].lower()
         if "australia" in name: return 1
@@ -121,12 +119,11 @@ async def dashboard_manager():
         if "japan" in name: return 3
         if "bahrain" in name: return 4
         if "saudi" in name: return 5
-        # Everything else gets a massive number based on its date, forcing it below the top 5
         return to_unix(race['date'], race['time'])
         
     display_schedule = sorted(schedule_cache, key=custom_sort)
 
-    # --- 3. BUILD THE SEAMLESS CALENDAR CHUNKS ---
+    # 3. BUILD SEAMLESS CHUNKS
     calendar_chunks = []
     current_chunk = f"# F1 2026 Calendar\n\n{PRE_SEASON}"
     
@@ -151,7 +148,6 @@ async def dashboard_manager():
         else:
             current_chunk += race_block
             
-    # Cleanly append the footer to the very last chunk
     footer_text = "\n*Reserved for Calendar*"
     if len(current_chunk) + len(footer_text) > 1900:
         calendar_chunks.append(current_chunk)
@@ -161,16 +157,16 @@ async def dashboard_manager():
         
     if current_chunk: calendar_chunks.append(current_chunk)
 
-    # --- 4. UPDATE EXISTING CALENDAR MESSAGES (Edits Only) ---
+    # 4. UPDATE MESSAGES (With safe .strip() checks)
     for i, chunk_text in enumerate(calendar_chunks):
         if i < len(calendar_messages):
-            if calendar_messages[i].content != chunk_text:
+            if calendar_messages[i].content.strip() != chunk_text.strip():
                 await calendar_messages[i].edit(content=chunk_text)
         else:
             msg = await channel.send(chunk_text)
             calendar_messages.append(msg)
 
-    # --- 5. MANAGE THE NEXT GP MESSAGE (Edits Only until race finishes) ---
+    # 5. MANAGE NEXT GP MESSAGE
     if next_race:
         round_number = next_race['round']
         short_text = generate_short_msg(next_race, current_time)
@@ -182,12 +178,10 @@ async def dashboard_manager():
             if next_gp_message:
                 try: await next_gp_message.delete()
                 except discord.NotFound: pass 
-            
             next_gp_message = await channel.send(short_text)
             current_next_round = round_number
-            
         elif next_gp_message:
-            if next_gp_message.content != short_text:
+            if next_gp_message.content.strip() != short_text.strip():
                 await next_gp_message.edit(content=short_text)
         else:
             next_gp_message = await channel.send(short_text)
@@ -204,7 +198,6 @@ async def on_ready():
     channel = bot.get_channel(CHANNEL_ID)
     if channel:
         print("Scanning channel history for existing bot messages...")
-        
         bot_msgs = []
         async for msg in channel.history(limit=50, oldest_first=True):
             if msg.author == bot.user:
@@ -212,7 +205,6 @@ async def on_ready():
                 
         calendar_messages = []
         next_gp_message = None
-        
         for msg in bot_msgs:
             if "Use **Channels & Roles**" in msg.content:
                 next_gp_message = msg
@@ -222,6 +214,25 @@ async def on_ready():
                 print(f"-> Hooked into Calendar Chunk {len(calendar_messages)}.")
         
         dashboard_manager.start()
-        print("Live Dashboard is running and securely locked into Edit-Only mode!")
+        print("Live Dashboard is running safely!")
 
+
+# --- DUMMY WEB SERVER (RENDER KEEP-ALIVE) ---
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "F1 Dashboard Bot is awake and running!"
+
+def run():
+    # Use the dynamic port Render provides, default to 8080 if running locally
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
+
+# --- START UP EVERYTHING ---
+keep_alive()
 bot.run(TOKEN)
