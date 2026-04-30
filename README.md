@@ -1,12 +1,12 @@
 # F1 Bot & Web Dashboard
 
-Welcome to the F1 Bot repository! This project combines a dynamic Discord bot with a dedicated web interface to serve up the latest from the grid. Whether you're tracking defensive masterclasses from the Minister of Defence, watching the Prince dominate the track, or just keeping up with the Goat, this application is built to deliver.
+F1 schedule project shows F1 calendar and upcoming races countdown live n realtime. This project combines a dynamic Discord bot with a dedicated web interface to serve up the latest from the grid.
 
 ## Project Overview
 
 This repository provides everything needed to run a Formula 1 Discord bot and an accompanying web platform. 
 * **Bot Engine:** The core functionality is driven by the `f1_bot.py` script
-* **Web Frontend:** The visual layout is handled by `index.html`  
+* **[Web](https://f1.trionine.xyz/) Frontend:** The visual layout is handled by `index.html`  
 
 ## Requirements
 
