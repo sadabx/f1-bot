@@ -1,6 +1,6 @@
-# F1 Bot & Web Dashboard
+a# F1 Bot & Web Dashboard
 
-F1 schedule project shows F1 calendar and upcoming races countdown live n realtime. This project combines a dynamic Discord bot with a dedicated web interface to serve up the latest from the grid.
+F1 schedule project shows the Formula 1 calendar and the upcoming races countdown live in real-time. This project combines a dynamic Discord bot with a dedicated web interface to serve up the latest from the grid.
 
 ## Project Overview
 
