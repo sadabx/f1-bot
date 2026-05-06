@@ -1,36 +1,65 @@
-# F1 Bot & Web Dashboard
+# F1 Live Dashboard
 
-F1 schedule project shows the Formula 1 calendar and the upcoming races countdown live in real-time. This project combines a dynamic Discord bot with a dedicated web interface to serve up the latest from the grid.
+A Formula 1 season dashboard with live schedule data, countdowns, standings, qualifying, and results. The dashboard serves a static frontend through Flask and merges race calendar data from Jolpica with session timing data from OpenF1.
 
-## Project Overview
+## Features
 
-This repository provides everything needed to run a Formula 1 Discord bot and an accompanying web platform. 
-* **Bot Engine:** The core functionality is driven by the `f1_bot.py` script
-* **[Web](https://f1.trionine.xyz/) Frontend:** The visual layout is handled by `index.html`  
+- Live race calendar with upcoming and past sessions
+- Countdown to the next race
+- Current driver standings, results, and qualifying grid
+- Optional relative-time view for session timestamps
+- Discord bot that can post the schedule to a channel
 
-## Requirements
+## Project Layout
 
-* **`discord.py`**: For full integration with the Discord API
-* **`Flask`**: To serve the web application and handle backend routing
-* **`requests`**: For fetching external F1 data endpoints
-* **`python-dotenv`**: To securely load environment variables and bot tokens
+- `index.html`, `styles.css`, `app.js`: browser dashboard
+- `server.py`: Flask app that serves the site and proxies API requests
+- `f1_bot.py`: Discord bot that posts F1 schedule updates
+- `requirements.txt`: Python dependencies
 
-## Installation & Usage
+## Prerequisites
 
-### 1. Local Setup
-Ensure you have Python installed, then install the required libraries:
-```
+- Python 3.10 or newer
+- A virtual environment is recommended
+- Internet access for the OpenF1 and Jolpica API requests
+
+## Setup
+
+```bash
+python -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Environment Variables
-Create a `.env` file in the root directory to store your sensitive credentials (thanks to `python-dotenv`):
-```env
-DISCORD_TOKEN=your_bot_token_here
+## Run the dashboard
+
+```bash
+python server.py
 ```
 
-### 3. Execution
-To start the bot locally, run the main Python file:
-```
+Then open `http://localhost:5000` in your browser.
+
+## Run the Discord bot
+
+1. Set `DISCORD_TOKEN` in a local `.env` file.
+2. Update the channel and role IDs in `f1_bot.py` if needed.
+3. Start the bot:
+
+```bash
 python f1_bot.py
 ```
+
+## API endpoints
+
+The Flask server proxies these endpoints:
+
+- `/api/openf1/sessions`
+- `/api/jolpica/schedule`
+- `/api/jolpica/results`
+- `/api/jolpica/standings`
+- `/api/jolpica/qualifying`
+
+## Notes
+
+- The repository includes local test scripts for schedule merge behavior and API parsing.
+- Secrets should stay in `.env`; the file is ignored by git.
