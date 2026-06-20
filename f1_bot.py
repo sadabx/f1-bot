@@ -36,6 +36,16 @@ FLAG_EMOJIS = {
     "Qatar Grand Prix": "🇶🇦", "Abu Dhabi Grand Prix": "🇦🇪"
 }
 
+PRE_SEASON = (
+    "## 🇧🇭 Pre-Season Testing\n"
+    "> ~~`Week 1 Day 1`: <t:1770822000:F> (<t:1770822000:R>)~~\n"
+    "> ~~`Week 1 Day 2`: <t:1770908400:F> (<t:1770908400:R>)~~\n"
+    "> ~~`Week 1 Day 3`: <t:1770994800:F> (<t:1770994800:R>)~~\n"
+    "> ~~`Week 2 Day 1`: <t:1771398000:F> (<t:1771398000:R>)~~\n"
+    "> ~~`Week 2 Day 2`: <t:1771484400:F> (<t:1771484400:R>)~~\n"
+    "> ~~`Week 2 Day 3`: <t:1771570800:F> (<t:1771570800:R>)~~\n"
+)
+
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
@@ -51,21 +61,88 @@ def to_unix(date_str, time_str):
         except:
             return 0 
 
+def normalize_race_name(name):
+    if not name:
+        return ""
+    if "grand prix" in name.lower():
+        return name
+        
+    mapping = {
+        "Australian": "Australian Grand Prix",
+        "Chinese": "Chinese Grand Prix",
+        "Japanese": "Japanese Grand Prix",
+        "Miami": "Miami Grand Prix",
+        "Canadian": "Canadian Grand Prix",
+        "Monaco": "Monaco Grand Prix",
+        "Barcelona-Catalunya": "Spanish Grand Prix",
+        "Austrian": "Austrian Grand Prix",
+        "British": "British Grand Prix",
+        "Belgian": "Belgian Grand Prix",
+        "Hungarian": "Hungarian Grand Prix",
+        "Dutch": "Dutch Grand Prix",
+        "Italian": "Italian Grand Prix",
+        "Spanish": "Spanish Grand Prix",
+        "Azerbaijan": "Azerbaijan Grand Prix",
+        "Singapore": "Singapore Grand Prix",
+        "United States": "United States Grand Prix",
+        "Mexican": "Mexico City Grand Prix",
+        "Brazilian": "Brazilian Grand Prix",
+        "Las Vegas": "Las Vegas Grand Prix",
+        "Qatar": "Qatar Grand Prix",
+        "Abu Dhabi": "Abu Dhabi Grand Prix",
+        "Australia": "Australian Grand Prix",
+        "China": "Chinese Grand Prix",
+        "Japan": "Japanese Grand Prix",
+        "Canada": "Canadian Grand Prix",
+        "São Paulo": "São Paulo Grand Prix",
+        "Emilia Romagna": "Emilia Romagna Grand Prix",
+        "Bahrain": "Bahrain Grand Prix",
+        "Saudi Arabia": "Saudi Arabian Grand Prix",
+        "Barcelona": "Spanish Grand Prix"
+    }
+    return mapping.get(name, name + " Grand Prix")
+
+def format_session(api_key, date_str, time_str, current_time):
+    name_map = {
+        "FirstPractice": "Practice 1 ", "SecondPractice": "Practice 2 ",
+        "ThirdPractice": "Practice 3 ", "Qualifying": "Qualifying ",
+        "SprintQualifying": "Sprint Qual", "Sprint": "    Sprint ",
+        "Race": "      Race "
+    }
+    display_name = name_map.get(api_key, api_key)
+    unix_time = to_unix(date_str, time_str)
+
+    line = f"`{display_name}`: <t:{unix_time}:F> (<t:{unix_time}:R>)"
+
+    if unix_time < current_time:
+        return f"> ~~{line}~~"
+    return f"> {line}"
+
+def format_race_header(race_name, is_past=False):
+    flag = FLAG_EMOJIS.get(race_name, "🏁")
+    return f"## {flag} {race_name}"
+
 def generate_short_msg(race, current_time):
     race_name = race['raceName']
     flag = FLAG_EMOJIS.get(race_name, "🏁")
     msg = f"## {flag} {race_name}\n\n"
-    
-    # Simple formatting logic for the sessions
-    for sess_key, display in [("FirstPractice", "Practice 1"), ("SecondPractice", "Practice 2"), 
-                              ("ThirdPractice", "Practice 3"), ("SprintQualifying", "Sprint Qual"), 
-                              ("Sprint", "Sprint"), ("Qualifying", "Qualifying"), ("Race", "Race")]:
-        if sess_key in race:
-            unix = to_unix(race[sess_key]['date'], race[sess_key]['time'])
-            line = f"`{display.ljust(11)}`: <t:{unix}:F> (<t:{unix}:R>)"
-            msg += f"~~{line}~~\n" if unix < current_time else f"{line}\n"
-            
-    msg += f"\nUse **Channels & Roles** and get the <@&{ROLE_ID}> role to receive notifications!"
+
+    if 'FirstPractice' in race:
+        msg += format_session("FirstPractice", race['FirstPractice']['date'], race['FirstPractice']['time'], current_time) + "\n"
+    if 'Sprint' in race:
+        if 'SprintQualifying' in race:
+            msg += format_session("SprintQualifying", race['SprintQualifying']['date'], race['SprintQualifying']['time'], current_time) + "\n"
+        msg += format_session("Sprint", race['Sprint']['date'], race['Sprint']['time'], current_time) + "\n"
+    else:
+        if 'SecondPractice' in race:
+            msg += format_session("SecondPractice", race['SecondPractice']['date'], race['SecondPractice']['time'], current_time) + "\n"
+        if 'ThirdPractice' in race:
+            msg += format_session("ThirdPractice", race['ThirdPractice']['date'], race['ThirdPractice']['time'], current_time) + "\n"
+    if 'Qualifying' in race:
+        msg += format_session("Qualifying", race['Qualifying']['date'], race['Qualifying']['time'], current_time) + "\n"
+
+    msg += format_session("Race", race['date'], race['time'], current_time) + "\n\n"
+    msg += f"React on F1 emoji in #rules to get <@&{ROLE_ID}> role to receive notifications!"
     return msg
 
 @client.event
@@ -114,33 +191,110 @@ async def on_ready():
                 await client.close()
                 return
 
+        # Normalize all race names in schedule cache
+        for race in schedule_cache:
+            race['raceName'] = normalize_race_name(race['raceName'])
+
         current_time = time.time()
         upcoming_races = [r for r in schedule_cache if to_unix(r['date'], r['time']) > current_time]
         next_race = min(upcoming_races, key=lambda r: to_unix(r['date'], r['time'])) if upcoming_races else None
 
-        if not next_race:
-            print("No upcoming races found.")
-            await client.close()
-            return
+        # Sort schedule by round number
+        display_schedule = sorted(schedule_cache, key=lambda r: int(r.get('round', 0)))
 
-        short_text = generate_short_msg(next_race, current_time)
+        # --- BUILD CALENDAR CHUNKS ---
+        calendar_chunks = []
+        current_chunk = f"# F1 2026 Calendar\n\n{PRE_SEASON}"
 
-        # 2. FIND EXISTING BOT MESSAGE TO UPDATE OR POST A NEW ONE
-        existing_msg = None
-        async for msg in channel.history(limit=20):
-            if msg.author == client.user and "Use **Channels & Roles**" in msg.content:
-                existing_msg = msg
-                break
+        for race in display_schedule:
+            race_name = race['raceName']
+            is_past_race = to_unix(race['date'], race['time']) < current_time
+            race_block = format_race_header(race_name, is_past_race) + "\n"
 
-        if existing_msg:
-            if existing_msg.content.strip() != short_text.strip():
-                await existing_msg.edit(content=short_text)
-                print("✅ Next GP message updated successfully.")
+            if 'FirstPractice' in race:
+                race_block += format_session("FirstPractice", race['FirstPractice']['date'], race['FirstPractice']['time'], current_time) + "\n"
+            
+            if 'Sprint' in race:
+                if 'SprintQualifying' in race:
+                    race_block += format_session("SprintQualifying", race['SprintQualifying']['date'], race['SprintQualifying']['time'], current_time) + "\n"
+                race_block += format_session("Sprint", race['Sprint']['date'], race['Sprint']['time'], current_time) + "\n"
             else:
-                print("ℹ️ No changes detected. Skipping edit.")
+                if 'SecondPractice' in race:
+                    race_block += format_session("SecondPractice", race['SecondPractice']['date'], race['SecondPractice']['time'], current_time) + "\n"
+                if 'ThirdPractice' in race:
+                    race_block += format_session("ThirdPractice", race['ThirdPractice']['date'], race['ThirdPractice']['time'], current_time) + "\n"
+            
+            if 'Qualifying' in race:
+                race_block += format_session("Qualifying", race['Qualifying']['date'], race['Qualifying']['time'], current_time) + "\n"
+            
+            race_block += format_session("Race", race['date'], race['time'], current_time) + "\n"
+
+            if len(current_chunk) + len(race_block) > 1900:
+                calendar_chunks.append(current_chunk)
+                current_chunk = race_block
+            else:
+                current_chunk += race_block
+
+        footer_text = "\n*Reserved for Calendar*"
+        if len(current_chunk) + len(footer_text) > 1900:
+            calendar_chunks.append(current_chunk)
+            current_chunk = footer_text
         else:
-            await channel.send(short_text)
-            print("✅ Sent new next GP message block.")
+            current_chunk += footer_text
+
+        if current_chunk:
+            calendar_chunks.append(current_chunk)
+
+        # --- FETCH HISTORY AND HOOK MESSAGES ---
+        print("Scanning channel history for existing bot messages...")
+        calendar_messages = []
+        next_gp_message = None
+        
+        async for msg in channel.history(limit=50, oldest_first=True):
+            if msg.author == client.user:
+                if "Use **Channels & Roles**" in msg.content or "React on F1 emoji in #rules" in msg.content:
+                    next_gp_message = msg
+                    print("-> Hooked into existing Next GP message.")
+                else:
+                    calendar_messages.append(msg)
+                    print(f"-> Hooked into Calendar Chunk {len(calendar_messages)}.")
+
+        # --- UPDATE CALENDAR MESSAGES ---
+        for i, chunk_text in enumerate(calendar_chunks):
+            if i < len(calendar_messages):
+                if calendar_messages[i].content.strip() != chunk_text.strip():
+                    await calendar_messages[i].edit(content=chunk_text)
+                    print(f"✅ Calendar Chunk {i+1} updated.")
+                else:
+                    print(f"ℹ️ Calendar Chunk {i+1} unchanged.")
+            else:
+                new_msg = await channel.send(chunk_text)
+                calendar_messages.append(new_msg)
+                print(f"✅ Sent new Calendar Chunk {i+1}.")
+
+        while len(calendar_messages) > len(calendar_chunks):
+            extra_msg = calendar_messages.pop()
+            try:
+                await extra_msg.delete()
+                print("🗑️ Deleted extra calendar message.")
+            except discord.NotFound:
+                pass
+
+        # --- UPDATE NEXT GP MESSAGE ---
+        if next_race:
+            short_text = generate_short_msg(next_race, current_time)
+
+            if next_gp_message:
+                if next_gp_message.content.strip() != short_text.strip():
+                    await next_gp_message.edit(content=short_text)
+                    print("✅ Next GP message updated successfully.")
+                else:
+                    print("ℹ️ Next GP message unchanged.")
+            else:
+                await channel.send(short_text)
+                print("✅ Sent new next GP message block.")
+        else:
+            print("No upcoming races found.")
 
     except Exception as e:
         print(f"💥 Error running bot task: {e}")
