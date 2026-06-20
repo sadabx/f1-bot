@@ -1,0 +1,1 @@
+worker: pip install -r discord-bot/requirements.txt && python discord-bot/f1_bot.py
