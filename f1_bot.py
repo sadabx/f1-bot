@@ -122,7 +122,7 @@ def format_race_header(race_name, is_past=False):
     flag = FLAG_EMOJIS.get(race_name, "🏁")
     return f"## {flag} {race_name}"
 
-def generate_short_msg(race, current_time):
+def generate_short_msg(race, current_time, rules_mention="#rules", role_mention=None):
     race_name = race['raceName']
     flag = FLAG_EMOJIS.get(race_name, "🏁")
     msg = f"## {flag} {race_name}\n\n"
@@ -142,7 +142,10 @@ def generate_short_msg(race, current_time):
         msg += format_session("Qualifying", race['Qualifying']['date'], race['Qualifying']['time'], current_time) + "\n"
 
     msg += format_session("Race", race['date'], race['time'], current_time) + "\n\n"
-    msg += f"React on F1 emoji in #rules to get <@&{ROLE_ID}> role to receive notifications!"
+    
+    if not role_mention:
+        role_mention = f"<@&{ROLE_ID}>"
+    msg += f"React on F1 emoji in {rules_mention} to get {role_mention} role to receive notifications!\nVisit <https://f1.trionine.xyz/> for the web dashboard."
     return msg
 
 @client.event
@@ -252,7 +255,7 @@ async def on_ready():
         
         async for msg in channel.history(limit=50, oldest_first=True):
             if msg.author == client.user:
-                if "Use **Channels & Roles**" in msg.content or "React on F1 emoji in #rules" in msg.content:
+                if "Use **Channels & Roles**" in msg.content or "React on F1 emoji" in msg.content:
                     next_gp_message = msg
                     print("-> Hooked into existing Next GP message.")
                 else:
@@ -282,7 +285,14 @@ async def on_ready():
 
         # --- UPDATE NEXT GP MESSAGE ---
         if next_race:
-            short_text = generate_short_msg(next_race, current_time)
+            rules_channel = discord.utils.get(channel.guild.channels, name="rules")
+            rules_mention = rules_channel.mention if rules_channel else "#rules"
+            
+            # Find the role f1-feed dynamically in the server's roles
+            f1_role = discord.utils.get(channel.guild.roles, name="f1-feed")
+            role_mention = f1_role.mention if f1_role else f"<@&{ROLE_ID}>"
+            
+            short_text = generate_short_msg(next_race, current_time, rules_mention, role_mention)
 
             if next_gp_message:
                 if next_gp_message.content.strip() != short_text.strip():
