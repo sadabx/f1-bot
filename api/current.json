@@ -1,0 +1,559 @@
+{
+  "MRData": {
+    "RaceTable": {
+      "season": "2026",
+      "Races": [
+        {
+          "round": "1",
+          "raceName": "Australian",
+          "date": "2026-03-08",
+          "time": "04:00:00Z",
+          "Circuit": {
+            "circuitName": "Melbourne"
+          },
+          "FirstPractice": {
+            "date": "2026-03-06",
+            "time": "01:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-03-06",
+            "time": "05:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-03-07",
+            "time": "01:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-03-07",
+            "time": "05:00:00Z"
+          }
+        },
+        {
+          "round": "2",
+          "raceName": "Chinese",
+          "date": "2026-03-15",
+          "time": "07:00:00Z",
+          "Circuit": {
+            "circuitName": "Shanghai"
+          },
+          "FirstPractice": {
+            "date": "2026-03-13",
+            "time": "03:30:00Z"
+          },
+          "SprintQualifying": {
+            "date": "2026-03-13",
+            "time": "07:30:00Z"
+          },
+          "Sprint": {
+            "date": "2026-03-14",
+            "time": "03:00:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-03-14",
+            "time": "07:00:00Z"
+          }
+        },
+        {
+          "round": "3",
+          "raceName": "Japanese",
+          "date": "2026-03-29",
+          "time": "05:00:00Z",
+          "Circuit": {
+            "circuitName": "Suzuka"
+          },
+          "FirstPractice": {
+            "date": "2026-03-27",
+            "time": "02:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-03-27",
+            "time": "06:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-03-28",
+            "time": "02:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-03-28",
+            "time": "06:00:00Z"
+          }
+        },
+        {
+          "round": "4",
+          "raceName": "Miami",
+          "date": "2026-05-03",
+          "time": "17:00:00Z",
+          "Circuit": {
+            "circuitName": "Miami"
+          },
+          "FirstPractice": {
+            "date": "2026-05-01",
+            "time": "16:00:00Z"
+          },
+          "SprintQualifying": {
+            "date": "2026-05-01",
+            "time": "20:30:00Z"
+          },
+          "Sprint": {
+            "date": "2026-05-02",
+            "time": "16:00:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-05-02",
+            "time": "20:00:00Z"
+          }
+        },
+        {
+          "round": "5",
+          "raceName": "Canadian",
+          "date": "2026-05-24",
+          "time": "20:00:00Z",
+          "Circuit": {
+            "circuitName": "Montreal"
+          },
+          "FirstPractice": {
+            "date": "2026-05-22",
+            "time": "16:30:00Z"
+          },
+          "SprintQualifying": {
+            "date": "2026-05-22",
+            "time": "20:30:00Z"
+          },
+          "Sprint": {
+            "date": "2026-05-23",
+            "time": "16:00:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-05-23",
+            "time": "20:00:00Z"
+          }
+        },
+        {
+          "round": "6",
+          "raceName": "Monaco",
+          "date": "2026-06-07",
+          "time": "13:00:00Z",
+          "Circuit": {
+            "circuitName": "Monte Carlo"
+          },
+          "FirstPractice": {
+            "date": "2026-06-05",
+            "time": "11:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-06-05",
+            "time": "15:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-06-06",
+            "time": "10:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-06-06",
+            "time": "14:00:00Z"
+          }
+        },
+        {
+          "round": "7",
+          "raceName": "Barcelona-Catalunya",
+          "date": "2026-06-14",
+          "time": "13:00:00Z",
+          "Circuit": {
+            "circuitName": "Barcelona"
+          },
+          "FirstPractice": {
+            "date": "2026-06-12",
+            "time": "11:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-06-12",
+            "time": "15:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-06-13",
+            "time": "10:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-06-13",
+            "time": "14:00:00Z"
+          }
+        },
+        {
+          "round": "8",
+          "raceName": "Austrian",
+          "date": "2026-06-28",
+          "time": "13:00:00Z",
+          "Circuit": {
+            "circuitName": "Spielberg"
+          },
+          "FirstPractice": {
+            "date": "2026-06-26",
+            "time": "11:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-06-26",
+            "time": "15:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-06-27",
+            "time": "10:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-06-27",
+            "time": "14:00:00Z"
+          }
+        },
+        {
+          "round": "9",
+          "raceName": "British",
+          "date": "2026-07-05",
+          "time": "14:00:00Z",
+          "Circuit": {
+            "circuitName": "Silverstone"
+          },
+          "FirstPractice": {
+            "date": "2026-07-03",
+            "time": "11:30:00Z"
+          },
+          "SprintQualifying": {
+            "date": "2026-07-03",
+            "time": "15:30:00Z"
+          },
+          "Sprint": {
+            "date": "2026-07-04",
+            "time": "11:00:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-07-04",
+            "time": "15:00:00Z"
+          }
+        },
+        {
+          "round": "10",
+          "raceName": "Belgian",
+          "date": "2026-07-19",
+          "time": "13:00:00Z",
+          "Circuit": {
+            "circuitName": "Spa-Francorchamps"
+          },
+          "FirstPractice": {
+            "date": "2026-07-17",
+            "time": "11:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-07-17",
+            "time": "15:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-07-18",
+            "time": "10:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-07-18",
+            "time": "14:00:00Z"
+          }
+        },
+        {
+          "round": "11",
+          "raceName": "Hungarian",
+          "date": "2026-07-26",
+          "time": "13:00:00Z",
+          "Circuit": {
+            "circuitName": "Budapest"
+          },
+          "FirstPractice": {
+            "date": "2026-07-24",
+            "time": "11:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-07-24",
+            "time": "15:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-07-25",
+            "time": "10:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-07-25",
+            "time": "14:00:00Z"
+          }
+        },
+        {
+          "round": "12",
+          "raceName": "Dutch",
+          "date": "2026-08-23",
+          "time": "13:00:00Z",
+          "Circuit": {
+            "circuitName": "Zandvoort"
+          },
+          "FirstPractice": {
+            "date": "2026-08-21",
+            "time": "10:30:00Z"
+          },
+          "SprintQualifying": {
+            "date": "2026-08-21",
+            "time": "14:30:00Z"
+          },
+          "Sprint": {
+            "date": "2026-08-22",
+            "time": "10:00:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-08-22",
+            "time": "14:00:00Z"
+          }
+        },
+        {
+          "round": "13",
+          "raceName": "Italian",
+          "date": "2026-09-06",
+          "time": "13:00:00Z",
+          "Circuit": {
+            "circuitName": "Monza"
+          },
+          "FirstPractice": {
+            "date": "2026-09-04",
+            "time": "10:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-09-04",
+            "time": "14:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-09-05",
+            "time": "10:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-09-05",
+            "time": "14:00:00Z"
+          }
+        },
+        {
+          "round": "14",
+          "raceName": "Spanish",
+          "date": "2026-09-13",
+          "time": "13:00:00Z",
+          "Circuit": {
+            "circuitName": "Madrid"
+          },
+          "FirstPractice": {
+            "date": "2026-09-11",
+            "time": "11:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-09-11",
+            "time": "15:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-09-12",
+            "time": "10:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-09-12",
+            "time": "14:00:00Z"
+          }
+        },
+        {
+          "round": "15",
+          "raceName": "Azerbaijan",
+          "date": "2026-09-26",
+          "time": "11:00:00Z",
+          "Circuit": {
+            "circuitName": "Baku"
+          },
+          "FirstPractice": {
+            "date": "2026-09-24",
+            "time": "08:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-09-24",
+            "time": "12:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-09-25",
+            "time": "08:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-09-25",
+            "time": "12:00:00Z"
+          }
+        },
+        {
+          "round": "16",
+          "raceName": "Singapore",
+          "date": "2026-10-11",
+          "time": "12:00:00Z",
+          "Circuit": {
+            "circuitName": "Singapore"
+          },
+          "FirstPractice": {
+            "date": "2026-10-09",
+            "time": "08:30:00Z"
+          },
+          "SprintQualifying": {
+            "date": "2026-10-09",
+            "time": "12:30:00Z"
+          },
+          "Sprint": {
+            "date": "2026-10-10",
+            "time": "09:00:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-10-10",
+            "time": "13:00:00Z"
+          }
+        },
+        {
+          "round": "17",
+          "raceName": "United States",
+          "date": "2026-10-25",
+          "time": "20:00:00Z",
+          "Circuit": {
+            "circuitName": "Austin"
+          },
+          "FirstPractice": {
+            "date": "2026-10-23",
+            "time": "17:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-10-23",
+            "time": "21:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-10-24",
+            "time": "17:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-10-24",
+            "time": "21:00:00Z"
+          }
+        },
+        {
+          "round": "18",
+          "raceName": "Mexican",
+          "date": "2026-11-01",
+          "time": "20:00:00Z",
+          "Circuit": {
+            "circuitName": "Mexico City"
+          },
+          "FirstPractice": {
+            "date": "2026-10-30",
+            "time": "18:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-10-30",
+            "time": "22:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-10-31",
+            "time": "17:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-10-31",
+            "time": "21:00:00Z"
+          }
+        },
+        {
+          "round": "19",
+          "raceName": "Brazilian",
+          "date": "2026-11-08",
+          "time": "17:00:00Z",
+          "Circuit": {
+            "circuitName": "Sao Paulo"
+          },
+          "FirstPractice": {
+            "date": "2026-11-06",
+            "time": "15:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-11-06",
+            "time": "19:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-11-07",
+            "time": "14:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-11-07",
+            "time": "18:00:00Z"
+          }
+        },
+        {
+          "round": "20",
+          "raceName": "Las Vegas",
+          "date": "2026-11-22",
+          "time": "04:00:00Z",
+          "Circuit": {
+            "circuitName": "Las Vegas"
+          },
+          "FirstPractice": {
+            "date": "2026-11-20",
+            "time": "00:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-11-20",
+            "time": "04:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-11-21",
+            "time": "00:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-11-21",
+            "time": "04:00:00Z"
+          }
+        },
+        {
+          "round": "21",
+          "raceName": "Qatar",
+          "date": "2026-11-29",
+          "time": "16:00:00Z",
+          "Circuit": {
+            "circuitName": "Doha"
+          },
+          "FirstPractice": {
+            "date": "2026-11-27",
+            "time": "13:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-11-27",
+            "time": "17:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-11-28",
+            "time": "14:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-11-28",
+            "time": "18:00:00Z"
+          }
+        },
+        {
+          "round": "22",
+          "raceName": "Abu Dhabi",
+          "date": "2026-12-06",
+          "time": "13:00:00Z",
+          "Circuit": {
+            "circuitName": "Yas Marina"
+          },
+          "FirstPractice": {
+            "date": "2026-12-04",
+            "time": "09:30:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-12-04",
+            "time": "13:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-12-05",
+            "time": "10:30:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-12-05",
+            "time": "14:00:00Z"
+          }
+        }
+      ]
+    }
+  }
+}

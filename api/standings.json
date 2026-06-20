@@ -1,0 +1,320 @@
+{
+  "MRData": {
+    "StandingsTable": {
+      "StandingsLists": [
+        {
+          "DriverStandings": [
+            {
+              "position": "1",
+              "points": "156",
+              "Driver": {
+                "givenName": "Kimi",
+                "familyName": "Antonelli",
+                "code": "ANT"
+              },
+              "Constructors": [
+                {
+                  "name": "Mercedes"
+                }
+              ]
+            },
+            {
+              "position": "2",
+              "points": "115",
+              "Driver": {
+                "givenName": "Lewis",
+                "familyName": "Hamilton",
+                "code": "HAM"
+              },
+              "Constructors": [
+                {
+                  "name": "Ferrari"
+                }
+              ]
+            },
+            {
+              "position": "3",
+              "points": "106",
+              "Driver": {
+                "givenName": "George",
+                "familyName": "Russell",
+                "code": "RUS"
+              },
+              "Constructors": [
+                {
+                  "name": "Mercedes"
+                }
+              ]
+            },
+            {
+              "position": "4",
+              "points": "75",
+              "Driver": {
+                "givenName": "Charles",
+                "familyName": "Leclerc",
+                "code": "LEC"
+              },
+              "Constructors": [
+                {
+                  "name": "Ferrari"
+                }
+              ]
+            },
+            {
+              "position": "5",
+              "points": "73",
+              "Driver": {
+                "givenName": "Lando",
+                "familyName": "Norris",
+                "code": "NOR"
+              },
+              "Constructors": [
+                {
+                  "name": "McLaren"
+                }
+              ]
+            },
+            {
+              "position": "6",
+              "points": "68",
+              "Driver": {
+                "givenName": "Oscar",
+                "familyName": "Piastri",
+                "code": "PIA"
+              },
+              "Constructors": [
+                {
+                  "name": "McLaren"
+                }
+              ]
+            },
+            {
+              "position": "7",
+              "points": "55",
+              "Driver": {
+                "givenName": "Max",
+                "familyName": "Verstappen",
+                "code": "VER"
+              },
+              "Constructors": [
+                {
+                  "name": "Red Bull Racing"
+                }
+              ]
+            },
+            {
+              "position": "8",
+              "points": "41",
+              "Driver": {
+                "givenName": "Pierre",
+                "familyName": "Gasly",
+                "code": "GAS"
+              },
+              "Constructors": [
+                {
+                  "name": "Alpine"
+                }
+              ]
+            },
+            {
+              "position": "9",
+              "points": "34",
+              "Driver": {
+                "givenName": "Isack",
+                "familyName": "Hadjar",
+                "code": "HAD"
+              },
+              "Constructors": [
+                {
+                  "name": "Red Bull Racing"
+                }
+              ]
+            },
+            {
+              "position": "10",
+              "points": "28",
+              "Driver": {
+                "givenName": "Liam",
+                "familyName": "Lawson",
+                "code": "LAW"
+              },
+              "Constructors": [
+                {
+                  "name": "Racing Bulls"
+                }
+              ]
+            },
+            {
+              "position": "11",
+              "points": "18",
+              "Driver": {
+                "givenName": "Oliver",
+                "familyName": "Bearman",
+                "code": "BEA"
+              },
+              "Constructors": [
+                {
+                  "name": "Haas F1 Team"
+                }
+              ]
+            },
+            {
+              "position": "12",
+              "points": "16",
+              "Driver": {
+                "givenName": "Franco",
+                "familyName": "Colapinto",
+                "code": "COL"
+              },
+              "Constructors": [
+                {
+                  "name": "Alpine"
+                }
+              ]
+            },
+            {
+              "position": "13",
+              "points": "13",
+              "Driver": {
+                "givenName": "Arvid",
+                "familyName": "Lindblad",
+                "code": "LIN"
+              },
+              "Constructors": [
+                {
+                  "name": "Racing Bulls"
+                }
+              ]
+            },
+            {
+              "position": "14",
+              "points": "6",
+              "Driver": {
+                "givenName": "Carlos",
+                "familyName": "Sainz",
+                "code": "SAI"
+              },
+              "Constructors": [
+                {
+                  "name": "Williams"
+                }
+              ]
+            },
+            {
+              "position": "15",
+              "points": "5",
+              "Driver": {
+                "givenName": "Alexander",
+                "familyName": "Albon",
+                "code": "ALB"
+              },
+              "Constructors": [
+                {
+                  "name": "Williams"
+                }
+              ]
+            },
+            {
+              "position": "16",
+              "points": "3",
+              "Driver": {
+                "givenName": "Esteban",
+                "familyName": "Ocon",
+                "code": "OCO"
+              },
+              "Constructors": [
+                {
+                  "name": "Haas F1 Team"
+                }
+              ]
+            },
+            {
+              "position": "17",
+              "points": "2",
+              "Driver": {
+                "givenName": "Gabriel",
+                "familyName": "Bortoleto",
+                "code": "BOR"
+              },
+              "Constructors": [
+                {
+                  "name": "Audi"
+                }
+              ]
+            },
+            {
+              "position": "18",
+              "points": "1",
+              "Driver": {
+                "givenName": "Fernando",
+                "familyName": "Alonso",
+                "code": "ALO"
+              },
+              "Constructors": [
+                {
+                  "name": "Aston Martin"
+                }
+              ]
+            },
+            {
+              "position": "19",
+              "points": "0",
+              "Driver": {
+                "givenName": "Nico",
+                "familyName": "Hulkenberg",
+                "code": "HUL"
+              },
+              "Constructors": [
+                {
+                  "name": "Audi"
+                }
+              ]
+            },
+            {
+              "position": "20",
+              "points": "0",
+              "Driver": {
+                "givenName": "Valtteri",
+                "familyName": "Bottas",
+                "code": "BOT"
+              },
+              "Constructors": [
+                {
+                  "name": "Cadillac"
+                }
+              ]
+            },
+            {
+              "position": "21",
+              "points": "0",
+              "Driver": {
+                "givenName": "Sergio",
+                "familyName": "Perez",
+                "code": "PER"
+              },
+              "Constructors": [
+                {
+                  "name": "Cadillac"
+                }
+              ]
+            },
+            {
+              "position": "22",
+              "points": "0",
+              "Driver": {
+                "givenName": "Lance",
+                "familyName": "Stroll",
+                "code": "STR"
+              },
+              "Constructors": [
+                {
+                  "name": "Aston Martin"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
