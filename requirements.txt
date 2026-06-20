@@ -1,4 +1,7 @@
 discord.py
-requests
 python-dotenv
-Flask
+requests
+pandas
+lxml
+beautifulsoup4
+html5lib
