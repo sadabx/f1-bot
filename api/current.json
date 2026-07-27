@@ -380,6 +380,31 @@
         },
         {
           "round": "16",
+          "raceName": "Bahrain Grand Prix (Malaysia)",
+          "date": "2026-10-04",
+          "time": "07:00:00Z",
+          "Circuit": {
+            "circuitName": "Sepang"
+          },
+          "FirstPractice": {
+            "date": "2026-10-02",
+            "time": "02:00:00Z"
+          },
+          "SecondPractice": {
+            "date": "2026-10-02",
+            "time": "06:00:00Z"
+          },
+          "ThirdPractice": {
+            "date": "2026-10-03",
+            "time": "06:00:00Z"
+          },
+          "Qualifying": {
+            "date": "2026-10-03",
+            "time": "09:00:00Z"
+          }
+        },
+        {
+          "round": "17",
           "raceName": "Singapore",
           "date": "2026-10-11",
           "time": "12:00:00Z",
@@ -404,7 +429,7 @@
           }
         },
         {
-          "round": "17",
+          "round": "18",
           "raceName": "United States",
           "date": "2026-10-25",
           "time": "20:00:00Z",
@@ -429,7 +454,7 @@
           }
         },
         {
-          "round": "18",
+          "round": "19",
           "raceName": "Mexican",
           "date": "2026-11-01",
           "time": "20:00:00Z",
@@ -454,7 +479,7 @@
           }
         },
         {
-          "round": "19",
+          "round": "20",
           "raceName": "Brazilian",
           "date": "2026-11-08",
           "time": "17:00:00Z",
@@ -479,7 +504,7 @@
           }
         },
         {
-          "round": "20",
+          "round": "21",
           "raceName": "Las Vegas",
           "date": "2026-11-22",
           "time": "04:00:00Z",
@@ -504,7 +529,7 @@
           }
         },
         {
-          "round": "21",
+          "round": "22",
           "raceName": "Qatar",
           "date": "2026-11-29",
           "time": "16:00:00Z",
@@ -529,7 +554,7 @@
           }
         },
         {
-          "round": "22",
+          "round": "23",
           "raceName": "Abu Dhabi",
           "date": "2026-12-06",
           "time": "13:00:00Z",
