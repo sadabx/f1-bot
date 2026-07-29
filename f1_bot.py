@@ -145,7 +145,7 @@ def generate_short_msg(race, current_time, rules_mention="#rules", role_mention=
     
     if not role_mention:
         role_mention = f"<@&{ROLE_ID}>"
-    msg += f"React on F1 emoji in {rules_mention} to get {role_mention} role to receive notifications!\nVisit <https://f1.trionine.xyz/> for the web dashboard."
+    msg += f"React on F1 emoji in {rules_mention} to get {role_mention} role to receive notifications!\nVisit <https://f1.trionine.com/> for the web dashboard."
     return msg
 
 @client.event
@@ -294,7 +294,24 @@ async def on_ready():
             
             short_text = generate_short_msg(next_race, current_time, rules_mention, role_mention)
 
-            if next_gp_message:
+            # Discord edits do not change a message's position. If a new calendar
+            # chunk was appended after the Next GP card, repost the card so the
+            # channel remains calendar-first and Next-GP-last.
+            next_gp_is_out_of_order = (
+                next_gp_message
+                and calendar_messages
+                and next_gp_message.id < calendar_messages[-1].id
+            )
+
+            if next_gp_is_out_of_order:
+                replacement = await channel.send(short_text)
+                try:
+                    await next_gp_message.delete()
+                except discord.NotFound:
+                    pass
+                next_gp_message = replacement
+                print("✅ Repositioned Next GP message after the calendar.")
+            elif next_gp_message:
                 if next_gp_message.content.strip() != short_text.strip():
                     await next_gp_message.edit(content=short_text)
                     print("✅ Next GP message updated successfully.")

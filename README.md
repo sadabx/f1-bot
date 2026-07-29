@@ -2,7 +2,7 @@
 
 A serverless Discord bot and schedule generator for Formula 1. The script fetches F1 calendar data, structures it, and updates Discord message blocks. It runs on a scheduled pipeline using GitHub Actions.
 
-Web Dashboard: https://f1.trionine.xyz/
+Web Dashboard: https://f1.trionine.com/
 
 ## Repository Structure
 
